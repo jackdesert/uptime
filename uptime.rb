@@ -1,11 +1,12 @@
 require 'pry'
 require 'sequel'
+require 'open3'
 
 module Uptime
   HOST = 'google.com'
   DB = Sequel.connect('sqlite://db/ping.db')
   COMMAND = "ping -c1 -w4 #{HOST}"
-  FAILURE_STRINGS = ['100% packet loss',
+  FAILURE_STRINGS = ['100% packet loss']
 
 
   class << self
@@ -56,7 +57,14 @@ module Uptime
     end
 
     def fetch_output
-      `#{COMMAND}`
+      Open3.popen3( COMMAND ) do |stdin, stdout, stderr, wait_thr|
+        puts stdin
+        puts "\n\n\nstdout: #{stdout.read}"
+        puts "\n\n\nstderr: #{stderr.read}"
+        puts "\n\n\npid: #{wait_thr.pid}"
+        puts "\n\n\nexit_status: #{wait_thr.value.exitstatus}"
+        binding.pry
+      end
     end
 
     def log_current_status_in_thread
@@ -73,5 +81,5 @@ module Uptime
 end
 
 
-binding.pry
+Uptime.send :fetch_output
 #Uptime.run
