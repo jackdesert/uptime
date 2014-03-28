@@ -49,11 +49,12 @@ Sample output:
 >   stdout: PING google.com (173.194.33.97) 56(84) bytes of data.
 >   64 bytes from sea09s16-in-f1.1e100.net (173.194.33.97): icmp_req=1 ttl=128 time=42.9 ms
 
-Now just let it run a while, several hours preferably so you can get a decent average.
 
 
 Display Stats
 -------------
+
+In a separate terminal window, you can ask for the running average.
 
     ruby stats.rb
 
