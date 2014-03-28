@@ -1,4 +1,4 @@
 *.swp
-db/*.db
+db/
 
 .bundle
