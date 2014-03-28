@@ -18,8 +18,9 @@ class Ping
 
   def print
     [:up?, :stdout, :stderr, :created_at, :exitstatus].each do |key|
-      puts "#{key}: #{ping.send(key)}"
+      puts "#{key}: #{send(key)}"
     end
+    puts "\n"
   end
 
   def log_current_status_in_thread
@@ -45,9 +46,27 @@ class Ping
 
   def log_current_status
     fire
-    hash = { up: up?, exitstatus: exitstatus, stdout: stdout, stderr: stderr, created_at: time_at_start_of_ping }
+    hash = { up: up?, exitstatus: exitstatus, stdout: stdout, stderr: stderr, created_at: created_at }
     pings.insert(hash)
-    puts hash.to_s
+    print
+  end
+
+
+  def self.create_table_if_not_present
+    unless DB.table_exists?(:pings)
+      DB.create_table :pings do
+        primary_key :id
+        Boolean :up
+        String :stdout
+        String :stderr
+        Integer :exitstatus
+        DateTime :created_at
+      end
+      DB.add_index :pings, :stdout
+      DB.add_index :pings, :stderr
+      DB.add_index :pings, :exitstatus
+      DB.add_index :pings, :created_at
+    end
   end
 end
 
