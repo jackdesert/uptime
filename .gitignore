@@ -2,3 +2,4 @@
 db/*.db
 
 .bundle
+.ruby-version
