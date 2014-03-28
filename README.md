@@ -39,14 +39,21 @@ Gather Data
 Sample output:
 
 >   --- google.com ping statistics ---
+>
 >   1 packets transmitted, 1 received, 0% packet loss, time 0ms
+>
 >   rtt min/avg/max/mdev = 44.124/44.124/44.124/0.000 ms
+>
 >   stderr:
+>
 >   created_at: 2014-03-28 08:29:46 -0700
+>
 >   exitstatus: 0
 >
 >   up?: true
+>
 >   stdout: PING google.com (173.194.33.97) 56(84) bytes of data.
+>
 >   64 bytes from sea09s16-in-f1.1e100.net (173.194.33.97): icmp_req=1 ttl=128 time=42.9 ms
 
 
@@ -61,8 +68,11 @@ In a separate terminal window, you can ask for the running average.
 Sample output from Century Link:
 
 > Total pings: 32215
+>
 > Up: 29359
+>
 > Down: 2856
+>
 > 91.135% uptime
 
 
