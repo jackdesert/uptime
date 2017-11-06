@@ -32,6 +32,12 @@ Also, make sure you are not storing the entire log unless you have
 some method of log rotation in place.
 
 
+OSX
+---
+
+If you are running this on OSX, you will need to change Ping::COMMAND
+to use "-t" instead of "-w"
+
 
 Prerequisites
 -------------
