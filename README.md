@@ -32,6 +32,13 @@ Also, make sure you are not storing the entire log unless you have
 some method of log rotation in place.
 
 
+
+Prerequisites
+-------------
+
+    sudo apt-get install libsqlite3-dev
+
+
 Installation
 ------------
 
