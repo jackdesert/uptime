@@ -6,6 +6,9 @@ class Ping
   DB = Sequel.connect('sqlite://db/ping.db')
   COMMAND = "ping -c1 -w4 #{HOST}"
 
+  MAX_AGE_IN_HOURS = 72
+  MAX_AGE_IN_SECONDS = MAX_AGE_IN_HOURS * 3600
+
   attr_accessor :exitstatus, :stdout, :stderr, :created_at
 
   def pings
@@ -26,6 +29,7 @@ class Ping
   def log_current_status_in_thread
     Thread.new do
       log_current_status
+      trim_table
     end
   end
 
@@ -49,6 +53,13 @@ class Ping
     hash = { up: up?, exitstatus: exitstatus, stdout: stdout, stderr: stderr, created_at: created_at }
     pings.insert(hash)
     print
+  end
+
+
+  def trim_table
+    old_pings = DB[:pings].where('created_at < ?', Time.now - MAX_AGE_IN_SECONDS)
+    count = old_pings.delete
+    puts "DELETED #{count}"
   end
 
 

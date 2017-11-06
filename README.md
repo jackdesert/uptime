@@ -1,26 +1,35 @@
 Uptime
 ======
 
-A micro tool for evaluating the uptime of your internet service provider (ISP). 
+A micro tool for evaluating the uptime of your internet service provider (ISP).
 
 
 Why
 ---
 
 Reliable Internet is sometimes more important that fast Internet. When it goes
-down, even if it's just for a few seconds, it interrupts thought processes, 
-disconnects from Skype calls, halts downloads, and aborts ssh sessions. Is 
+down, even if it's just for a few seconds, it interrupts thought processes,
+disconnects from Skype calls, halts downloads, and aborts ssh sessions. Is
 your ISP living up to its promise of four nines? You can find out.
 
 
 How it Works
 ------------
 
-Every second, a new thread initiates a ping to google.com to see whether it 
-gets a response or not. The ping is given a four second timeout. A ping that 
+Every second, a new thread initiates a ping to google.com to see whether it
+gets a response or not. The ping is given a four second timeout. A ping that
 returns an exit status of 0 is logged as a success. Any other exit status
 is logged as a failure. Each ping (including its stdout and stderr) is saved
 to an sqlite database in db/ping.db so you can query for distinct failure modes.
+
+
+Storage Size
+------------
+
+You can limit the total size of data captured by editing Ping::MAX_AGE_IN_HOURS
+
+Also, make sure you are not storing the entire log unless you have
+some method of log rotation in place.
 
 
 Installation
