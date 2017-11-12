@@ -20,10 +20,9 @@ class Ping
   end
 
   def print
-    [:up?, :stdout, :stderr, :created_at, :exitstatus].each do |key|
-      puts "#{key}: #{send(key)}"
-    end
-    puts "\n"
+    status = up? ? 'up  ' : 'down'
+    timestamp = created_at.strftime('%H:%M:%S')
+    puts "#{status} #{timestamp}"
   end
 
   def log_current_status_in_thread
@@ -59,7 +58,6 @@ class Ping
   def trim_table
     old_pings = DB[:pings].where('created_at < ?', Time.now - MAX_AGE_IN_SECONDS)
     count = old_pings.delete
-    puts "DELETED #{count}"
   end
 
 
