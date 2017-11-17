@@ -10,10 +10,11 @@
 # But according to https://en.wikipedia.org/wiki/Packet_loss
 # ping is considered low priority traffic, and when they are dropped they are not re-sent.
 #
-# Why Yahoo?
-# Yahoo provides a small payload. (The word "redirect")
-# Yahoo is ubiquitous.
-# Yahoo is assumed to be up all the time.
+# Why assets/simple.txt from our staging site?
+# It's a small file that we control,
+# being served directly from nginx so it's FAST.
+# And it's in the amazon cloud which appears to have
+# super reliable network.
 #
 # Why Bash?
 # So we don't have to install anything extra to run this.
@@ -21,7 +22,7 @@
 
 
 
-HOST='yahoo.com'
+HOST='https://staging.elitecare.com/assets/simple.txt'
 
 up_count=0
 down_count=0
@@ -31,7 +32,7 @@ do
   printf $(date +'%FT%H:%M:%S.%N')
   printf '  '
 
-  curl --max-time 4 $HOST > /dev/null 2> /dev/null
+  curl -k --max-time 4 $HOST > /dev/null 2> /dev/null
   if [ $? == 0 ]; then
     up_count=$((up_count+1))
     printf 'UP     '
