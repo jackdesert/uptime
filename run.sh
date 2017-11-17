@@ -8,6 +8,9 @@ down_count=0
 
 while true
 do
+  printf $(date +'%FT%H:%M:%S.%N')
+  printf '  '
+
   ping -c1 -w4 $HOST > /dev/null 2> /dev/null
   if [ $? == 0 ]; then
     up_count=$((up_count+1))
@@ -17,10 +20,11 @@ do
     printf 'DOWN   '
   fi
 
-  printf 'up: '
+
+  printf 'successes: '
   printf $up_count
 
-  printf '   down: '
+  printf '   failures: '
   printf $down_count
 
   printf '\n'
