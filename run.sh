@@ -31,7 +31,7 @@ do
   printf $(date +'%FT%H:%M:%S.%N')
   printf '  '
 
-  curl --connect-timeout 4 $HOST > /dev/null 2> /dev/null
+  curl --max-time 4 $HOST > /dev/null 2> /dev/null
   if [ $? == 0 ]; then
     up_count=$((up_count+1))
     printf 'UP     '
