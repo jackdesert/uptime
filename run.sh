@@ -50,5 +50,5 @@ do
 
   printf '\n'
 
-  sleep 1
+  sleep 0.1
 done
