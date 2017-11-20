@@ -27,12 +27,22 @@ HOST='https://staging.elitecare.com/assets/simple.txt'
 up_count=0
 down_count=0
 
+
+COMMAND="curl -k --max-time 8 $HOST > /dev/null 2> /dev/null"
+
+echo '######################################################'
+echo 'Uptime Monitor'
+echo ''
+echo $COMMAND
+echo ''
+echo '######################################################'
+
 while true
 do
   printf $(date +'%FT%H:%M:%S.%N')
   printf '  '
 
-  curl -k --max-time 4 $HOST > /dev/null 2> /dev/null
+  eval $COMMAND
   if [ $? == 0 ]; then
     up_count=$((up_count+1))
     printf 'UP     '
