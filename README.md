@@ -3,6 +3,14 @@ Uptime
 
 A micro tool for evaluating the uptime of your internet service provider (ISP).
 
+Bash-Only Version
+-----------------
+
+If you want to run a bash-only version of Uptime (fewer dependencies),
+simply start `screen`, then call:
+
+    ./run.sh
+
 
 Why
 ---
